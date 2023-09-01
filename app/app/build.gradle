@@ -1,0 +1,30 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.9.0'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url = "https://bykov-836553440049.d.codeartifact.eu-central-1.amazonaws.com/maven/personal-maven-hosted/"
+        credentials {
+            username "aws"
+            password System.getenv("CODEARTIFACT_AUTH_TOKEN")
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.bykov.awsartifact:lib:0.0.1'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'app.AppKt'
+}
